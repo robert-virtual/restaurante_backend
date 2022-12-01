@@ -1,6 +1,6 @@
 import validateApiKey from "@server/utils/apiKeyValidator";
 const apiKeyMW = (req, res, next)=>{
-  const apikey = req.get('apikey') || '';
+  const apikey = req.get('apikey') || req.query.apikey || '';
   if (validateApiKey(apikey)){
     return next();
   }

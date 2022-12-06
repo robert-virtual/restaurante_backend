@@ -10,6 +10,7 @@ const createServer = () => {
   app.use(expressLogger);
   app.use(cors());
   app.use(express.json());
+  app.use(express.static("uploads"));
   app.disable('x-powered-by');
   app.use('/', rootRoute);
   app.use(expressNotFound);

@@ -2,7 +2,7 @@ import { getConnection as getMongoDBConn } from '@models/mongodb/MongoDBConn';
 import { ProductoDao as ProductoMongoDbDao } from '@models/mongodb/ProductoDao';
 export interface IProducto {
   nombre: string;
-  imagen: string;
+  imagenes: string[];
   precio: number;
   description: string;
   categoria: string;

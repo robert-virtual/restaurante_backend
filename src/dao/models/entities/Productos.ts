@@ -1,7 +1,7 @@
 
 export interface IProducto {
   nombre:string
-  imagenes: IImage[];
+  imagenes: string[];
   precio: number;
   description: string;
   categoria: string;

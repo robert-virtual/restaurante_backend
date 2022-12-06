@@ -76,22 +76,26 @@ router.post('/testvalidator', jwtValidator, async (req, res) => {
   return res.json({ email });
 });
 
-router.post('/new',upload.array("images"), jwtValidator, async (req: WithUserRequest, res) => {
+router.post('/new',upload.array("imagenes"), jwtValidator, async (req: WithUserRequest, res) => {
   try {
     const { _id: userId } = req.user;
     const newProducto = req.body as unknown as IProducto;
     //VALIDATE
+    console.log({files:req.files});
+    
     let images:string[] = []
     if (req.files) {
        images = req.files.map((e)=>e.filename)
-      
     }
     newProducto.imagenes = images
-    const newProductoIndex = await productoInstance.addProducto(
-      newProducto,
-      userId,
-    );
-    res.json({ newIndex: newProductoIndex });
+    console.log({newProducto});
+    
+    // const newProductoIndex = await productoInstance.addProducto(
+    //   newProducto,
+    //   userId,
+    // );
+    // res.json({ newIndex: newProductoIndex });
+    res.json({ newIndex: 1 });
   } catch (error) {
     res.status(500).json({ error: (error as Error).message });
   }

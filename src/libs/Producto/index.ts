@@ -46,12 +46,12 @@ export class Producto {
   }
 
   public addProducto(producto: IProducto, userId: string) {
-    const { nombre, createdAt, imagen, precio, categoria, description } =
+    const { nombre, createdAt, imagenes, precio, categoria, description } =
       producto;
     return this.dao.insertNewProducto(
       {
         nombre,
-        imagen,
+        imagenes,
         precio: Number(precio),
         categoria,
         updatedAt: new Date(),

@@ -3,7 +3,6 @@ import { IProducto, Producto } from '@libs/Producto';
 import { commonValidator, validateInput } from '@server/utils/validator';
 import { WithUserRequest } from '@routes/index';
 import { jwtValidator } from '@server/middleware/jwtBeaereValidator';
-import upload from '@server/middleware/multer';
 const router = Router();
 const productoInstance = new Producto();
 
@@ -76,17 +75,12 @@ router.post('/testvalidator', jwtValidator, async (req, res) => {
   return res.json({ email });
 });
 
-router.post('/new',upload.array("images"), jwtValidator, async (req: WithUserRequest, res) => {
+router.post('/new', jwtValidator, async (req: WithUserRequest, res) => {
   try {
     const { _id: userId } = req.user;
     const newProducto = req.body as unknown as IProducto;
     //VALIDATE
-    let images:string[] = []
-    if (req.files) {
-       images = req.files.map((e)=>e.filename)
-      
-    }
-    newProducto.imagenes = images
+
     const newProductoIndex = await productoInstance.addProducto(
       newProducto,
       userId,
